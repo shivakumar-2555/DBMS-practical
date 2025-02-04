@@ -1,0 +1,96 @@
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 8.0.40 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use chintu202;
+Database changed
+mysql> CREATE  TABLE collage (
+    ->  studentID INT PRIMARY KEY AUTO_INCREMENT,
+    ->  name VARCHAR(100),
+    ->  age INT,
+    -> Department VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> INSERT INTO collage (Name, Age, Department) VALUES
+    -> ('shiva',20,'CSE'),
+    -> ('tarun',19,'IT'),
+    -> ('gagan',19,'DS'),
+    -> ('prashanth',21,'CS');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql>  CREATE TABLE details (
+    -> CourseID INT PRIMARY KEY,
+    ->  CourseName VARCHAR(100),
+    -> Department VARCHAR(50),
+    -> Credits INT
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql>  INSERT INTO details (CourseID, CourseName, Department, Credits) VALUES
+    -> (1,'Database Management', 'CSE', 4),
+    -> (2,'Networking', 'IT', 3),
+    -> (3,'Microprocessors', 'DS', 4);
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from collage;
++-----------+-----------+------+------------+
+| studentID | name      | age  | Department |
++-----------+-----------+------+------------+
+|         1 | shiva     |   20 | CSE        |
+|         2 | tarun     |   19 | IT         |
+|         3 | gagan     |   19 | DS         |
+|         4 | prashanth |   21 | CS         |
++-----------+-----------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from details;
++----------+---------------------+------------+---------+
+| CourseID | CourseName          | Department | Credits |
++----------+---------------------+------------+---------+
+|        1 | Database Management | CSE        |       4 |
+|        2 | Networking          | IT         |       3 |
+|        3 | Microprocessors     | DS         |       4 |
++----------+---------------------+------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE VIEW CS_Student202 AS
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> CREATE VIEW CS_collage AS
+    -> SELECT * FROM collage WHERE Department = 'CSE';
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SELECT * FROM CS_collage;
++-----------+-------+------+------------+
+| studentID | name  | age  | Department |
++-----------+-------+------+------------+
+|         1 | shiva |   20 | CSE        |
++-----------+-------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE VIEW collage_details AS select collage.Name,details.CourseName from collage,details where collage.Department = details.Department;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> Select * from collage_details;
++-------+---------------------+
+| Name  | CourseName          |
++-------+---------------------+
+| shiva | Database Management |
+| tarun | Networking          |
+| gagan | Microprocessors     |
++-------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql>
